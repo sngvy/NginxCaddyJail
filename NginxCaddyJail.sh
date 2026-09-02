@@ -70,9 +70,12 @@ port = http,https
 filter = nginx-any-request
 logpath = /var/log/nginx/access.log
 banaction = ipset-allports[name=bad_ips]
-findtime = 2
-maxretry = 2
-bantime = 24h
+findtime = 120
+maxretry = 30
+bantime = 1h
+bantime.increment = true
+bantime.factor = 4
+bantime.maxtime = 24h
 usedns = no
 EOF
 fi
@@ -86,9 +89,12 @@ filter = caddy-any-request
 backend = systemd
 journalmatch = _COMM=caddy
 banaction = ipset-allports[name=bad_ips]
-findtime = 2
-maxretry = 2
-bantime = 24h
+findtime = 120
+maxretry = 30
+bantime = 1h
+bantime.increment = true
+bantime.factor = 4
+bantime.maxtime = 24h
 usedns = no
 EOF
 fi
